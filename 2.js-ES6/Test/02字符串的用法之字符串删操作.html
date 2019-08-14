@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>02字符串的用法之字符串删操作</title>
+</head>
+<body>
+    
+
+    <script>
+
+        // 删除所有的a(方法一) ==> 把所有的a都替换成空字符串
+        let str = "abcdaabbssaaa";
+        let reg = new RegExp("a","g");
+        let a = str.replace(reg,"");
+        console.log("str----" + str);   // str----abcdaabbssaaa
+        console.log("删除所有的a，根据正则表达式----" + a);    // 删除所有的a，根据正则表达式----bcdbbss
+
+        // 先查找一共有n个a
+        let index = -1;
+        let n = 0;
+        do{
+            index = str.indexOf("a",index+1);
+            if(index != -1){
+                n+=1;
+            }
+        }while(index != -1)
+        console.log("str中一共有" + n + "个a"); // str中一共有6个a
+
+        // 删除所有的a(方法二) ==> 先找到字符串中共有n个a，再替换n次
+        for(let i = 0; i < n; i++){
+            str = str.replace("a","");
+        }
+        console.log("删除所有的a，执行6次replace()----" + str);    // 删除所有的a，replace()----bcdbbss
+
+        // 删除所有的a(方法三) ==> 先把a分割成数组，再拼接成字符串
+        let str1 = "abcdaabbssaaa";
+        let a1 = str1.split("a").join("");
+        console.log("删除所有的a，先把a分割成数组再拼接成字符串----" + a1); // 删除所有的a，先把a分割成数组再拼接成字符串----bcdbbss
+
+        // 删除指定位置的字符串
+        function delStrByIndex(n){
+            let stred = str1.split("");
+            delete stred[n];
+            stred = stred.join("");
+            return stred;
+        }
+        console.log("删除指定位置的字符串----" + delStrByIndex(1) );    // 删除指定位置的字符串----acdaabbssaaa
+
+        // 删除首个a(方法一)
+        let b = str1.replace("a","");
+        console.log("删除首个字符 replace()----" + b);    // 删除首个字符 replace()----bcdaabbssaaa
+
+        // 删除首个a(方法二)
+        function delFirstStr(str){
+            str = str.split("");
+            str.shift();
+            str = str.join("");
+            return str;
+        }
+        console.log("删除首个字符 shift()----" + delFirstStr(str1));    // 删除首个字符 shift()----bcdaabbssaaa
+
+        // 删除最后一个a
+        function delLastStr(str){
+            str = str.split("");
+            str.pop();
+            str = str.join("");
+            return str;
+        }
+        console.log("删除最后一个 pop()----" + delLastStr(str1));   // 删除最后一个 pop()----abcdaabbssaa
+
+        
+        /*
+         * delnTimeStr 简介：删除第n次出现的字符串
+         * @param str String 表示要操作的内容; word String 表示要删除的字符; n number 表示删除第n次出现的word
+         * @return str String 表示“删除第n次出现的字符串”的结果
+         */
+        function delnTimeStr (str, word, n){
+            // 把每次出现的位置纪录到数组中
+            let arr = [];
+            let index = -1;
+            do{
+                index = str.indexOf(word,index+1);
+                if(index != -1){
+                    arr.push(index);
+                }
+            }while(index != -1);
+
+            console.log( arr ); // (6) [0, 4, 5, 10, 11, 12]
+            // 获取到第n次出现word的下标
+            let xb = arr[1];
+            str = str.slice(0,xb) + str.slice(xb).replace(word,"");
+            return str;
+        };
+        console.log( delnTimeStr(str1,"a",1) ); // abcdabbssaaa
+
+
+    </script>
+</body>
+</html>

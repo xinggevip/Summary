@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串增操作</title>
+</head>
+<body>
+    
+
+    <script>
+        // 声明变量
+        let str = "Hello";
+        let bef = "前";
+        let aft = "后";
+        let indexStr = "根据下标";
+        let count = "";
+        // 在前面加
+        count = bef + str;  // 前Hello
+        // 在后面加
+        count = str + aft;  // Hello后
+        // 在指定下标位置加
+        (function addStrByIndex(index){
+            // 此功能的实现主要是slice()方法的掌握
+            count = str.slice(0,index) + indexStr + str.slice(index);
+            console.log("在下标为2的位置插入字符串------" +  count );   // He根据下标llo
+        })(2);
+        // 在指定字符前加字符串
+        // 方法可返回某个指定的字符串值在字符串中首次出现的位置。如果要检索的字符串值没有出现，则该方法返回 -1。
+        let firstIndex = str.indexOf("e");
+        (function addStrByIndex(index){
+            count = str.slice(0,index) + bef + str.slice(index);
+            console.log("在e前面加字符串-----" + count );   // 在e前面加字符串-----H前ello
+        })(firstIndex);
+        // 在指定字符后加字符串
+        (function addStrByIndex(index){
+            index+=1;
+            count = str.slice(0,index) + aft + str.slice(index);
+            console.log("在e后面加字符串-----" + count );   // 在e后面加字符串-----He后llo
+        })(firstIndex);
+
+
+        // 在所有指定字符串前加字符串
+        // 根据indexof查找下标
+        let index = -1;
+        let arr = [];
+        do{
+            index = str.indexOf("l",index+1);
+            if(index != -1){
+                // 说明找到了
+                // count = str.slice(0,index) + "前" + str.slice(index);
+                arr.push(index);
+            }
+        }while(index != -1);
+
+        // 从大到小排序,冒泡排序
+        let i, j;
+        let temp;
+        for(i = 0; i < arr.length; i++){
+            for(j = 0; j < arr.length - i -1;j++){
+                if(arr[j] < arr[j+1]){
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        console.log("l出现的位置------" + arr); // l出现的位置------3,2
+        for(i = 0;i < arr.length;i++){
+            str = str.slice(0,arr[i]) + "降" + str.slice(arr[i]);   // 每一个l后加---------He降l降lo
+        }
+        console.log("每一个l后加---------" + str);
+        
+    </script>
+</body>
+</html>
