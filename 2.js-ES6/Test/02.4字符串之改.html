@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串改操作</title>
+</head>
+<body>
+
+
+    <script>
+        // 替换首次出现的指定字符串
+        let str = "Hellow world! Hellow Gaoxing!"
+        console.log( str.replace("o","l") );    // Helllw world! Hellow Gaoxing!
+
+        // 替换所有的指定字符串
+        // 构思：先统计共出现了n次，再执行n次replace()次方法就行了
+        function repAll(str, word, newword){
+            let arr = [];
+            let index = -1;
+            do{
+                index = str.indexOf(word,index + 1);
+                if(index != -1){
+                    arr.push(index);
+                }
+            }while(index != -1);
+            console.log( word + "出现了" + arr.length + "次" );
+
+            // 替换arr.length次出现的字符串
+            for(let i = 0; i < arr.length; i++){
+                str = str.replace(word, newword);
+            }
+            // 输出
+            console.log( str );
+        }
+        repAll(str, "l", "w");  // Hewwow worwd! Hewwow Gaoxing!
+
+        // 替换第n个指定的字符串,n是从0开始数的
+        function repByIndex(str, word, newword, n){
+            let arr = [];
+            let index = -1;
+            do{
+                index = str.indexOf(word,index + 1);
+                if(index != -1){
+                    arr.push(index);
+                }
+            }while(index != -1);
+            // 得到出现的次数和位置
+            // 获取第n次位置的下标
+            let site = arr[n];
+            // 输出
+            console.log( str.slice(0,site) + str.slice(site).replace(word, newword) );
+        }
+        repByIndex(str,"l","z",1);  // Helzow world! Hellow Gaoxing!
+
+        
+        
+    </script>
+</body>
+</html>
