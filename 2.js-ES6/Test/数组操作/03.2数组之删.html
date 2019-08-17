@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组之删</title>
+</head>
+<body>
+    
+
+    <script>
+        // ary.pop() 删除数组的最后一项，返回的是删除的那一项，原有数组改变
+        let ary1 = [1, 2, 3, 4];
+        console.log( "ary1----" + ary1 );
+        ary1.pop();
+        console.log("ary1.pop()----" + ary1 );    // [1, 2, 3]
+
+        // ary.shift() 删除数组的的第一项，返回的是删除的那一项，原有数组改变
+        let ary2 = [1, 2, 3, 4];
+        console.log( "ary2----" + ary2 );
+        console.log("ary2.shift()----" + ary2.shift() );    // 返回删除的那一项---->1，pop也一样
+        console.log("ary2.shift()----" + ary2 );    // [2, 3, 4]
+
+        // splice()也可以删除
+        // 删除第一项
+        let ary3 = [1, 2, 3, 4];
+        console.log( "ary3----" + ary3 );
+        ary3.splice(0,1);
+        console.log("ary3.splice(0,1)----" + ary3);  // [2, 3, 4]
+
+        // 删除最后一项
+        let ary4 = [1, 2, 3, 4];
+        console.log("ary4----" + ary4 );
+        ary4.splice(ary4.length - 1,1);
+        console.log("ary4.splice(ary4.length - 1, 1)----" + ary4);  // [1, 2, 3]
+
+        // delete 删除
+        // delete删除之后数组长度不变，只是被删除元素被置为undefined了。
+        let ary5 =[1, 2, 3, 4];
+        console.log("ary5----" + ary5 );
+        delete ary5[2];
+        console.log("delete ary5[2]----" + ary5 ) // [1, 2, empty, 4]
+
+        // length删除最后若干项
+        let ary6 = [1, 2, 3, 4];
+        console.log( "ary6----" + ary6 );
+        ary6.length = ary6.length - 2;
+        console.log("ary6.length = ary6.length - 2 ====>" + ary6 ); // 1,2
+
+        // 删除指定下标的值
+        let ary7 = [1, 2, 3, 4];
+        console.log( "ary7----" + ary7 );
+        ary7.splice(2,1);
+        console.log( "ary7.splice(2,1)----" + ary7 );   // 1,2,4
+
+        // 按条件删除之forEach,不可以return
+        let ary8 = [1, 2, 3, 4];
+        ary8.forEach(function (item, index, arr){
+            if(item == 1){
+                arr.splice(index,1);
+            }
+        });
+        console.log(ary8);  // [2, 3, 4]
+
+        // 按条件删除之fillter,可以return 返回数组本身的成员
+        let ary9 = [1, 2, 3, 4];
+        let result = ary9.filter(function (item, index, arr){
+            return item % 2 == 0;
+        });
+        console.log( result );  // [2, 4]
+
+        // 按条件删除之map
+        let ary10 = [1, 2, 3, 4];
+        let aryed = ary10.map(function (item, index, arr){
+            return item + 100;
+        });
+        console.log(aryed); // [101, 102, 103, 104]
+
+
+    </script>
+</body>
+</html>

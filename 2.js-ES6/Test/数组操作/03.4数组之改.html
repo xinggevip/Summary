@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组之改</title>
+</head>
+<body>
+    
+    <script>
+        // 直接调用下标改
+        let ary1 = [1, 2, 3, 4];
+        console.log( "ary1----" + ary1 );
+        ary1[1] = 66;
+        console.log( "ary1[1] = 66----" + ary1 );    // [1, 66, 3, 4]
+
+        // 批量修改改之forEach
+        let ary2 = [1, 2, 3, 4];
+        ary2.forEach(function (item, index, arr){
+            ary2.splice(index,1,item * 2);
+        });
+        console.log( ary2 );    // [2, 4, 6, 8]
+
+        // 批量修改之fillter，过滤
+        let ary3 = [1, 2, 3, 4];
+        ary3 = ary3.filter(function (item, index, arr){
+            return item % 2 == 0;
+        });
+        console.log( ary3 );    // [2, 4]
+
+        // 批量修改之map
+        let ary4 = [1, 2, 3, 4];
+        ary4 = ary4.map(function (item, index, arr){
+            return item + 100;
+        });
+        console.log( ary4 );    // [101, 102, 103, 104]
+
+        // splice(index, n, x);  在index位置起，包括index，删除n个项，把x插入在index位置
+        
+    </script>
+</body>
+</html>

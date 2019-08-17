@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组之增</title>
+</head>
+<body>
+    
+
+    <script>
+        // ary.push()   向数组末尾添加元素，返回的是添加后新数组的长度，原有数组改变
+        let arr = [1, 5, 6, 9, 7, 8, 2];
+        console.log("arr----" + arr );
+        arr.push(88);
+        console.log("arr.push(88)----" + arr ); // [1, 5, 6, 9, 7, 8, 2, 88]
+        
+        // arr.unshift() 向数组的开头添加元素，返回的是添加元素后数组的长度，怨偶数组改变
+        arr.unshift(99);
+        console.log("arr.unshift(99)----" + arr ); // [99, 1, 5, 6, 9, 7, 8, 2, 88]
+
+        // ary.splice(n,m,x)从索引n开始删除m个元素，把新增的元素X放在索引n的前面，把删除的元素当成一个新数组返回，原有数组改变。
+        let arr1 = [1, 2, 3, 4];
+        console.log("arr1----" + arr1 );
+        arr1.splice(1,2,666);
+        console.log("arr1.splice(1,2,666)----" +  arr1 );   // 1,666,4
+
+        // ary.splice(n,0,x)从索引n开始删除0个元素，把新增加的元素x放在索引n的前面，返回的是一个空数组，原有数组改变。
+        let arr2 = [1, 2, 3, 4];
+        console.log("arr2----" + arr2 );
+        arr2.splice(1,0,333);
+        console.log("arr2.splice(1,0,333)----" + arr2 );    // 1,333,2,3,4
+
+        // ary.splice(n,m)从索引n开始删除m个元素，把删除的内容当做新数组返回，原有数组改变
+        let arr3 = [1, 2, 3, 4];
+        console.log("arr3----" + arr3);
+        arr3.splice(1,2);
+        console.log("arr3.splice(1,2)----" + arr3); // 1,4
+
+    </script>
+</body>
+</html>

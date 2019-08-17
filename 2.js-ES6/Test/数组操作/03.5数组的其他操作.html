@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组的其他操作</title>
+</head>
+<body>
+    
+
+<script>
+    let ary1 = [1, 2, 8, 7, 88, 90, 60, 50];
+    console.log("ary1----" + ary1 );
+    ary1.reverse();
+    console.log("ary1.reverse()----" + ary1 );  // 倒序
+
+    function sortNumber(a, b)
+    {
+        // return a - b 升序
+        // return b - a 降序
+        return a - b;
+    }
+
+    let ary2 = [1, 2, 8, 7, 88, 90, 60, 50, 43, 48, 21, 29];
+    console.log("ary2----" + ary2 );
+    ary2.sort(sortNumber);
+    console.log("ary2.sort(sortNumber)----" + ary2 );   // 升序
+    ary2.reverse();
+    console.log("ary2.resverse()----" + ary2 ); // 把升序的数组再倒序
+
+    let ary3 = [60, 50, 43, 48, 21, 29];    // length <= 10按照number升序，length > 10 按照字符串规则排序
+    ary3.sort();
+    console.log( ary3 );
+
+</script>
+</body>
+</html>

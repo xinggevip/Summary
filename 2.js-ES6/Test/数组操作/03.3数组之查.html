@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组之查</title>
+</head>
+<body>
+    
+    <script>
+        // 通过下标查询值
+        let ary1 = [1, 2, 3, 4];
+        console.log( ary1[1] );
+
+        // slice(n, m) 返回从数组n索引到m-1索引范围的项
+        let ary2 = [1, 2, 3, 4, 5, 6, 7, 8];
+        let ary3 = ary2.slice(2,6);
+        console.log("ary3----" + ary3); // 3,4,5,6
+
+        // slice(n)  返回从数组n索引到末尾范围的项
+        let ary4 = [1, 2, 3, 4, 5, 6, 7, 8];
+        let ary5 = ary4.slice(2);
+        console.log( "ary5----" + ary5 );
+
+        // slice(0)  返回整个数组
+        let ary6 = [1, 2, 3, 4, 5, 6, 7, 8];
+        let ary7 = ary6.slice(0);
+        console.log( ary7 );
+
+        // concat拼接数组
+        let ary8 = [1, 2, 3];
+        let ary9 = [4, 5, 6];
+        let ary10 = ary8.concat(ary9);
+        console.log( ary10 );
+
+        // forEach\map可遍历查询，三个参数(item, index, arr)
+    </script>
+</body>
+</html>
