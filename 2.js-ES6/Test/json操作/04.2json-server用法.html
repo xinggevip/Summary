@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="margin-top: 20px;">
+                <button class="btn btn-default" id="getBtn">getBtn</button>
+                <button class="btn btn-default" id="postBtn">postBtn</button>
+                <button class="btn btn-default" id="putBtn">putBtn</button>
+                <button class="btn btn-default" id="deltBtn">delBtn</button>
+                <br>
+                <!-- <textarea name="text" id="t1" cols="30" rows="10"></textarea> -->
+
+                <table class="table table-striped" id="oneTable">
+                    <thead>
+                        <th>id</th>
+                        <th>姓名</th>
+                        <th>电话</th>
+                        <th>邮箱</th>
+                        <th>年龄</th>
+                        <th>公司</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../3.jQuery/jqueryFile/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    <!-- 存储服务 -->
+    <script src="../../../node_modules/leancloud-storage/dist/av-min.js"></script>
+    <script>
+        // 首先搭建json-server服务器
+        // $("#t1").text("haha");
+
+        // ajax请求json-server
+
+        // get
+        $(function () {
+            let dataG;
+
+
+            var APP_ID = '7RxU7Ik3Ah1bIRFoDLv2kn2G-gzGzoHsz';
+            var APP_KEY = '7Gv0EudsSqLJ16v4NhAvinR0';
+
+
+            AV.init({
+                appId: APP_ID,
+                appKey: APP_KEY
+            });
+
+            // var TestObject = AV.Object.extend('TestObject');
+            // var testObject = new TestObject();
+            // testObject.set('words', 'Hello world!');
+            // testObject.save().then(function (testObject) {
+            //     console.log('保存成功。')
+            // })
+
+            var query = new AV.Query('TestObject');
+            // query.equalTo('lastName', 'Smith');
+            query.find().then(function (TestObject) {
+                // students 是包含满足条件的 Student 对象的数组
+                console.log( TestObject );
+            });
+
+
+            $("#getBtn").click(function () {
+                $.ajax({
+                    type: "GET", // 请求类型
+                    url: "http://localhost:3000/users",
+                    dataType: "json",  //预期服务器返回数据的类型
+                    success: function (data) {
+                        console.log(data);
+                        dataG = data;
+                        if (data) {
+                            //清除数据
+                            $("#oneTable tbody").html("");
+                            // 添加数据
+                            for (let i = 0; i < data.length; i++) {
+                                $("#oneTable tbody").append("<tr><td>" + data[i]["id"] + "</td><td>" + data[i]["name"] + "</td><td>" + data[i]["phone"] + "</td><td>" + data[i]["email"] + "</td><td>" + data[i]["age"] + "</td><td>" + data[i]["companyId"] + "</td></tr>");
+
+                            };
+                        } else {
+                            alert("请求数据失败");
+                        }
+                    },
+                    error: function () {
+                        alert("发生错误");
+                    }
+                });
+            });
+            $("#postBtn").click(function () {
+                $.ajax({
+                    type: "POST", // 请求类型
+                    url: "http://localhost:3000/users",
+                    data: {
+                        "name": "测试post",
+                        "phone": "测试post",
+                        "email": "测试post",
+                        "age": "测试post",
+                        "companyId": "测试post"
+                    },
+                    dataType: "json",  //预期服务器返回数据的类型
+                    success: function (data) {
+                        console.log(data);
+                        if (data) {
+                            // 添加数据
+                            $("#oneTable tbody").append("<tr><td>" + data["id"] + "</td><td>" + data["name"] + "</td><td>" + data["phone"] + "</td><td>" + data["email"] + "</td><td>" + data["age"] + "</td><td>" + data["companyId"] + "</td></tr>");
+                            alert("添加成功");
+                        } else {
+                            alert("请求数据失败");
+                        }
+                    },
+                    error: function () {
+                        alert("发生错误");
+                    }
+                });
+            });
+
+            $("#putBtn").click(function () {
+                $.ajax({
+                    type: "PUT", // 请求类型
+                    url: "http://localhost:3000/users/1",
+                    data: {
+                        "name": "修改名字",
+                        "phone": "修改手机号",
+                        "email": "修改邮箱",
+                        "age": "修改年龄",
+                        "companyId": "2"
+                    },
+                    dataType: "json",  //预期服务器返回数据的类型
+                    success: function (data) {
+                        console.log(data);
+                        if (data) {
+                            // 执行getBtn得click事件 
+                            $("#getBtn").trigger("click");
+                            alert("修改成功");
+                        } else {
+                            alert("请求数据失败");
+                        }
+                    },
+                    error: function () {
+                        alert("发生错误");
+                    }
+                });
+            });
+
+            $("#deltBtn").click(function () {
+
+                $("#getBtn").trigger("click");
+                let num = dataG.length - 1;
+                let n = dataG[num]["id"];
+                $.ajax({
+                    type: "DELETE", // 请求类型
+                    url: "http://localhost:3000/users/" + n,
+                    dataType: "json",  //预期服务器返回数据的类型
+                    success: function (data) {
+                        console.log(data);
+                        if (data) {
+                            // 执行getBtn得click事件 
+                            $("#getBtn").trigger("click");
+                            alert("删除成功");
+                        } else {
+                            alert("请求数据失败");
+                        }
+                    },
+                    error: function () {
+                        alert("发生错误");
+                    }
+                });
+            });
+
+
+            $("#getBtn").trigger("click");
+        });
+
+
+
+    </script>
+</body>
+
+</html>

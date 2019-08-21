@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        // 合并对象Object.assign( x, y, z );
+        let json1 = {a:1};
+        let json2 = {b:2};
+        let json3 = {c:3};
+        let newJson = Object.assign(json1, json2, json3);
+        console.log( "Object.assign(json1, json2, json3)----" );
+        console.log( newJson );
+
+        // 添加属性
+        let json4 = {
+            a:1,
+            b:2,
+            c:3
+        };
+        json4.name = "Tom";
+        json4["age"] = 18;
+        console.log( json4 );   // {a: 1, b: 2, c: 3, name: "Tom", age: 18}
+        
+        // 删除属性
+        let json5 = {
+            a:1,
+            b:2,
+            c:3
+        };
+        delete json5.a;
+        delete json5["b"];
+        console.log( json5 );   //{c: 3}
+
+        // 获取属性值
+        let json6 = {
+            a:1,
+            b:2,
+            c:3
+        };
+        console.log( json6.a, json6["b"] ); // 1 2
+
+        // 修改属性值
+        let json7 = {
+            a:1,
+            b:2,
+            c:3
+        };
+        json7.a = "修改a";
+        json7["b"] = "修改b";
+        console.log( json7 );   // {a: "修改a", b: "修改b", c: 3}
+
+        // 遍历Object
+        let json8 = {
+            name:"Tom",
+            sex:"boy",
+            age:18
+        };
+        for(let key of Object.entries(json8)){
+             // name sex age    Object.keys(Obj)
+             // Tom boy 18    Object.values(Obj)
+             // ["name", "Tom"] ["sex", "boy"] ["age", 18]    Object.entries(Obj)
+            console.log( key );
+        };
+
+        // 解构Object
+        let {keys, values, entries} = Object;
+        for(let key of keys(json8)){
+            console.log(key);   // name sex age
+        };
+
+        for(let key of values(json8)){
+            console.log(key);   // Tom boy 18
+        };
+
+        for(let key of entries(json8)){
+            console.log(key);   // ["name", "Tom"] ["sex", "boy"] ["age", 18]
+        };
+
+        let json9 = {
+            b:2,
+            c:3,
+            d:4,
+            e:5
+        };
+
+        function getJson({a=10,b,c,...x}){
+            console.log(a,b,c,x);
+        };
+        getJson(json9); // // 10 2 3 {d: 4, e: 5}
+
+
+
+    </script>
+</body>
+</html>
