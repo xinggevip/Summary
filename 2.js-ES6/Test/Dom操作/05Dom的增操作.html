@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="list">
+        <li>第1项</li>
+        <li>第2项</li>
+        <li>第3项</li>
+        <li>第4项</li>
+        <li>第5项</li>
+    </ul>
+
+    <script src="../../../3.jQuery/jqueryFile/jquery-3.4.1.js"></script>
+    <script>
+        $(function () {
+            /*
+             * append()
+             */
+            let num = 5;
+            for (let i = 0; i < 5; i++) {
+                $("#list").append("<li>" + "第" + (++num) + "项" + "</li>");
+            };
+
+            let newDom = $("<li>newDom</li>");
+            $("#list").append(newDom);
+
+            $("#list").append($("<li>Dom元素</li>"));
+
+            // function(元素索引， 元素中的文本)
+            $("#list li").append(function (index, ele) {
+                console.log(index, ele);
+                return "<b>Function返回的文本</b>";
+            });
+
+            $("#list").append("<li>内容</li>");
+            $("#list li").eq(-1).append("新文本");
+
+
+
+        })
+    </script>
+</body>
+
+</html>
