@@ -16,6 +16,32 @@
         <li>第4项</li>
         <li>第5项</li>
     </ul>
+    <ul id="list-two">
+        <li>第1项</li>
+        <li>第2项</li>
+        <li>第3项</li>
+        <li>第4项</li>
+        <li>第5项</li>
+    </ul>
+    <ul id="list-three">
+        <li>第1项</li>
+        <li>第2项</li>
+        <li>第3项</li>
+        <li>第4项</li>
+        <li>第5项</li>
+    </ul>
+    <ul id="list-four">
+        <li>第1项</li>
+        <li>第2项</li>
+        <li>第3项</li>
+        <li>第4项</li>
+        <li>第5项</li>
+    </ul>
+
+
+
+
+    <p>I would like to say: </p><div id="foo">Hello</div>
 
     <script src="../../../3.jQuery/jqueryFile/jquery-3.4.1.js"></script>
     <script>
@@ -41,6 +67,27 @@
 
             $("#list").append("<li>内容</li>");
             $("#list li").eq(-1).append("新文本");
+
+
+            // after
+
+            $("#list-two li").after(function (index, ele){
+                console.log( index, ele );
+                if(index < 2){
+                    return "<li>after添加</li>";
+                }
+            });
+
+            // before
+            $("#list-three li").before("<li>brfore添加</li>");
+
+            // insertAfter(content)
+            // $("p").insertAfter("#foo");
+            $("p").insertAfter("#list-two");
+
+
+            $("#list-four li").wrapAll("<ul class=\'custom\'></ul>");
+
 
 
 
